@@ -1,0 +1,12 @@
+<br><br><br>
+<% if user_signed_in? %>
+  <p>Bienvenido <%= current_user.email %></p>
+<% end %>
+<h1>Tan fácil como poner el nombre del anime en la siguiente barra.</h1>
+
+
+<% @animes.each do |anime|%>
+  <div class="well">
+    <h1><%= anime.name %></h1>
+  </div>
+<% end %>

@@ -1,0 +1,16 @@
+<br><br>
+<% @animes.each do |anime| %>
+  <div class="well">
+    <div class="row">
+      <div class="col-4">
+        <h1><%=anime.name%></h1>
+      </div>
+      <div class="col-4">
+        <h1><%=anime.chapters%></h1>
+      </div>
+      <div class="col-4">
+        <h1><%=anime.idPage%></h1>
+      </div>
+    </div>
+  </div>
+<% end %>

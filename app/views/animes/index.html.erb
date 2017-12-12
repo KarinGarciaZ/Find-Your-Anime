@@ -1,0 +1,23 @@
+<br><br>
+<h1>Todos los animes</h1>
+
+<% @animes.each do |anime| %>
+  <div class="well">
+    <h3><%= link_to anime.name, anime %></h3>
+    <p>Capitulos:  <%= anime.chapters %></p>
+    <p>Pagina:  <%= anime.idPage %></p>
+  </div>
+<% end %>
+
+<%= link_to 'Ver', "/uno", :class=> "btn btn-primary"%>
+
+<br><br>
+<%= form_for :buscarAnime, url: '/uno' do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field(:name, {:class => 'form-control'}) %>
+  </p>
+  <p>
+    <%= f.submit({:class => 'btn btn-primary'})%>
+  </p>
+<% end %>
