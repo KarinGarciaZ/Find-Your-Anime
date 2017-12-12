@@ -16,7 +16,7 @@
   <h1>Comentarios</h1>
   <ul>
     <% @anime.comments.each do |comment| %>
-      <li><%= comment.body %> - <%= comment.user.email %></li>
+      <li><%= comment.body %> - <%= comment.user.email %>     <%= link_to 'Eliminar', [comment.anime, comment], method: :delete, data: {confirm: 'Estas seguro?'}, :class=> "btn btn-danger"%></li>
     <% end %>
   </ul>
 </div>

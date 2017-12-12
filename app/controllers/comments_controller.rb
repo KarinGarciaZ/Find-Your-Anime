@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :set_anime
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!
+  
 
   # GET /comments
   # GET /comments.json
@@ -31,11 +32,11 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @anime, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
+        format.html { redirect_to @comment.anime, notice: 'Comment was successfully created.' }
+        format.json { render :show, status: :created, location: @comment.anime }
       else
         format.html { render :new }
-        format.json { render json: @anime.errors, status: :unprocessable_entity }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,7 +46,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to @comment.anime, notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit }
@@ -57,11 +58,15 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @anime = Anime.find(params[:anime_id])
+    @comment = @anime.comments.find(params[:id])
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to anime_path(@anime)
+    # @comment.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private

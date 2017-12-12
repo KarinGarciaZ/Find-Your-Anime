@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   root 'homes#index'
   resources :animes do
-    resources :comments, only: [:create, :destroy, :update]
+    resources :comments
   end
   resources :pages 
 end
