@@ -4,6 +4,24 @@
 <h2>Creado por:  <%= @anime.user.email %><h2>
 <h2>Pagina:  <%= @anime.page.name %><h2>
 
+<hr>
+<div>
+  <h1>Hacer Comentario</h1>
+  <br>
+  <%= render "comments/form" %>  
+  <br>
+</div>
+
+<div>
+  <h1>Comentarios</h1>
+  <ul>
+    <% @anime.comments.each do |comment| %>
+      <li><%= comment.body %> - <%= comment.user.email %></li>
+    <% end %>
+  </ul>
+</div>
+
+
 
 <%= link_to "Edit", edit_anime_path(@anime), :class => 'btn btn-primary' %>
 <%= link_to 'Eliminar', @anime, method: :delete, data: {confirm: 'Estas seguro?'}, :class=> "btn btn-danger"%>

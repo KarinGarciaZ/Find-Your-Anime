@@ -1,6 +1,6 @@
 class AnimesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_article, except: [:index, :new, :create]
+  before_action :set_anime, except: [:index, :new, :create]
 
   def index
     @animes = Anime.all
@@ -12,6 +12,7 @@ class AnimesController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
   end
 
   def create
@@ -50,7 +51,7 @@ class AnimesController < ApplicationController
   #   redirect_to new_user_session_path, notice: "Debes iniciar sesion"
   # end
 
-  def set_article
+  def set_anime
     @anime = Anime.find(params[:id])
   end
 

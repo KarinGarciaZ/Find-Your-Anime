@@ -37,6 +37,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 
+gem 'jquery-turbolinks'
+
 group :test do
   gem 'sqlite3'
 end

@@ -1,3 +1,10 @@
 <br><br>
 <h1><%= @page.name %><h1>
-<a><%= @page.url %>%><a>
+<a><%= @page.url %><a>
+
+<% @page.animes.each do |anime| %>
+  <div class="well">
+    <h3><%= anime.name %></h3>
+    <h3><%= anime.chapters %></h3>
+  </div>
+<% end %>
