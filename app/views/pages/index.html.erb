@@ -1,0 +1,9 @@
+<br><br>
+<h1>Todas las Paginas</h1>
+
+<% @pages.each do |page| %>
+  <div class="well">
+    <h3><%= link_to page.name, page %></h3>
+    <a>link:  <%= page.url %></a>
+  </div>
+<% end %>

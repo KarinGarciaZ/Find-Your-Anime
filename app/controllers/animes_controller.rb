@@ -1,13 +1,6 @@
 class AnimesController < ApplicationController
-
-  def uno
-    puts(buscarAnime_param)
-    @animes = Anime.where("name like ?", buscarAnime_param)
-  end
-
-  def uno
-    @animes = Anime.where("name like ?", buscarAnime_param)
-  end
+  before_action :authenticate_user!, except: [:show, :index]
+  before_action :set_article, except: [:index, :new, :create]
 
   def index
     @animes = Anime.all
@@ -15,14 +8,18 @@ class AnimesController < ApplicationController
 
   def new
     @anime = Anime.new
+    @pages = Page.all
   end
 
   def show
-    @anime = Anime.find(params[:id])
   end
 
   def create
-    @anime = Anime.new(anime_params)
+    # @id = anime_page
+    # puts(@id)
+    # @page = Page.where("id = ?",@id.idPage)
+    
+    @anime = current_user.animes.new(anime_params)
     if (@anime.valid?)
       @anime.save
       redirect_to @anime
@@ -32,11 +29,9 @@ class AnimesController < ApplicationController
   end
 
   def edit
-    @anime = Anime.find(params[:id])
   end
 
   def update
-    @anime = Anime.find(params[:id])
     if (@anime.update(anime_params))
       redirect_to @anime
     else
@@ -45,19 +40,30 @@ class AnimesController < ApplicationController
   end
 
   def destroy
-    @anime = Anime.find(params[:id])
     @anime.destroy
     redirect_to animes_path
   end 
 
   private 
 
+  # def validate_user
+  #   redirect_to new_user_session_path, notice: "Debes iniciar sesion"
+  # end
+
+  def set_article
+    @anime = Anime.find(params[:id])
+  end
+
   def buscarAnime_param
     params.require(:buscarAnime).permit(:name)
   end 
   
   def anime_params
-    params.require(:anime).permit(:name, :chapters, :idPage)
+    params.require(:anime).permit(:name, :chapters, :idPage, :page_id)
   end   
+
+  def anime_page
+    params.require(:anime).permit(:idPage)
+  end 
 
 end

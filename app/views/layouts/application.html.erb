@@ -25,10 +25,14 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><%= link_to "Animes", animes_path %></li>
-          </ul>     
+          </ul>    
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Paginas", pages_path %></li>
+          </ul> 
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li><%= link_to "Create Anime", new_anime_path %></li>
+              <li><%= link_to "Create Page", new_page_path %></li>
             <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
